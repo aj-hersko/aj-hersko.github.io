@@ -1,0 +1,138 @@
+/* You implement */
+
+html {
+    font-size: 20px;
+    color: white;
+    margin:0px;
+    background-image: url(images/JimHenson.jpg);
+    background-repeat: no-repeat;
+    background-size: 1000px;
+    font-family: Arial;
+    border: 5px azure solid;
+}
+
+body{
+
+    border:  green solid;
+    border-width: 6px;
+    margin: 0px;
+
+}
+
+h1{
+    color: azure;
+    margin-left: 10px;
+    margin-top: 5px;
+    background-color: rgba(0,0,0,.4);
+    display:inline-block;
+    text-decoration: underline;
+}
+
+.af{
+    color:brown;
+    font-family: Arial;
+}
+
+a:hover{
+    font-size: smaller;
+}
+
+.af:visited{
+    color:beige;
+}
+
+p{
+    text-align:center;
+
+    margin-top: 200px;
+    margin-left:auto;
+    margin-right:auto;
+    margin-bottom: 320px;
+
+    width: 250px;
+    height: 50px;
+
+    border: solid black;
+    background: rgb(211,211,211, 0.8);
+}
+
+form{
+    margin-top: 15px;
+    margin-left:45px;
+    margin-bottom: 100px;
+    margin-right: auto;
+
+    width: 500px;
+    height: auto;
+
+    padding: 15px;
+
+    background: rgba(255, 255, 255, 0.85);
+    border: solid azure 5px;
+
+    color: black;
+    
+}
+
+#formy{
+    margin-bottom: 290px;
+}
+
+#tbox{
+    width: 500px;
+}
+
+#addy{
+    width: 250px;
+}
+
+.buttony {
+    margin-top: 20px;
+    font-size: 12px;
+    border: double black 3px;
+    padding: 9px;
+    border-radius: 7px;
+    width: 100px;
+    margin-right: 5px;
+    margin-bottom: 10px;
+}
+
+label {
+    line-height: 40px;
+
+    font-family: 'Helvetica';
+    text-decoration: underline;
+}
+
+.l{
+    text-decoration: none;
+}
+
+footer{
+    border: 5px lightblue solid;
+    color: white;
+    margin: 1px;
+    bottom: 0px;
+}
+
+a{
+    color: white;
+}
+
+div{
+    color: white;
+    padding: 15px;
+    font-size: 25px;
+    font-style: italic;
+    background-color: red;
+    border: 10px lightgrey ridge;
+    text-align: center;
+}
+
+pre{
+    font-style:normal;
+    text-decoration: none;
+    font-size: 12px;
+
+}
+

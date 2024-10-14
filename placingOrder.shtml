@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+    <title>Placing Order</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+
+    <h1>Placing Order</h1>
+
+    <form id="formy" action="processing/placingOrder.php" method="post">
+        <label>Item Serial #</label> 
+        <input name="serialNumber" type = text placeholder="umd-item-0000" required autofocus>
+        <br>
+
+        <label >Credit Card #</label> 
+
+        <input name="cc1" type="text" maxLength="4" size="4" pattern="[0-9]{4}" required>
+        <label class="l">-</label>
+        <input name="cc2" type="text" maxLength="4" size="4" pattern="[0-9]{4}" required>
+        <label class="l">-</label>
+        <input name="cc3" type="text" maxLength="4" size="4" pattern="[0-9]{4}" required>
+        <label class="l">-</label>
+        <input name="cc4" type="text" maxLength="4" size="4" pattern="[0-9]{4}" required>
+
+        <br>
+        <label>Shipping Address</label>
+        <input name="shipping" type="text" maxLength="80" required>
+
+        <br>
+        <label>Contact Email Address:</label>&nbsp;
+        <input id="addy" type="email" name="email" placeholder="example@terpmail.umd.edu" required>
+        
+
+        <br>
+        <input class="buttony" type="submit" value="Submit Order">
+    
+        <input class="buttony" type="reset" value="Clear">
+
+    </form>
+
+</body>
+ 
+ 
+<!--#include virtual="footer.shtml" --> 
