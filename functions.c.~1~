@@ -1,0 +1,18 @@
+#include "functions.h"
+
+/* REMOVE THIS COMMENT, then write your implementations of the functions in
+ * this source file. 
+ * Skeleton versions of the functions already appear below.
+ */
+
+short compare_rectangles(int l1, int w1, int l2, int w2) {
+  return 12345;
+}
+
+int ith_factor(int a, int b, int i) {
+  return 54321;
+}
+
+long pell(short n) {
+  return 13579;
+}
