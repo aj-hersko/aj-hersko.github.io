@@ -32,8 +32,8 @@ app.listen(portNumber);
 console.log(`Web server started and running at http://localhost:${portNumber}`);
 process.stdin.setEncoding("utf8");
 
-if (process.argv.length != 3) {
-    process.stdout.write(`Usage ${process.argv[1]} PortNumber`);
+if (process.argv.length != 2) {
+    process.stdout.write(`Usage ${process.argv[1]}`);
     process.exit(1);
 }
 
