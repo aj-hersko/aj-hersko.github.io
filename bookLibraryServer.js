@@ -56,6 +56,7 @@ app.post('/bookDisplay', (request, response) => {
           author: firstBook.author_name ? firstBook.author_name[0] : 'Unknown Author', // Handle missing author name
           bookUrl,
           rating: firstBook.ratings_average.toFixed(2), // Ensure rating is formatted
+          ratingCount: firstBook.ratings_count,
           coverImg: `https://covers.openlibrary.org/b/isbn/${firstBook.isbn[0]}-M.jpg`
         });
       }
