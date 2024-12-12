@@ -3,31 +3,24 @@
 
 <head>
 	<meta charset="utf-8" />
-	<title>Terps Summer Camp</title>
+	<title>Personal Book Library</title>
 </head>
 
 <body>
-    <h1>Welcome to Terps Summer Camp</h1>
-	<h2>Applicant</h2>
-    <ul>
-        <li>
-            To apply select <a href="/apply">Application</a><br>
-        </li>
-        <li>
-            To review/update an aplication select <a href="/reviewApplication">Review Application</a><br>
-        </li>
-    </ul>
-	<hr>
+    <h1>Welcome to your Personal Library</h1>
+	<h2>Search for Book:</h2>
+    <form id="bookForm" action="/bookDisplay" method="post">
+        <fieldset> 
+            <label><strong>Book Title: </strong><input type="text" name="title"/></label> 
+            <label><strong>Book Author: </strong><input type="text" name="author"></label><br><br> 
+        </fieldset> 
 
-    <h2>Admin</h2>
-    <ul>
-        <li>
-            To select users based on gpa <a href="/adminGFA">Select by GPA</a><br>
-        </li>
-        <li>
-            To remove all applications <a href="/adminRemove">Remove All Applications</a><br>
-        </li>
-    </ul>
+            <br> 
+            <input type="reset" /> 
+            <button type="submit">Search for Book</button> 
+    </form> 
+    <hr>
+    <p>To view saved books select <a href="/wishList">Wish List</a><br></p>
     <hr>
 </body>
 
