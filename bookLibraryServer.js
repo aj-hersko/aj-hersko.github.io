@@ -6,7 +6,7 @@ const express = require('express');
 const app = express();
 
 app.set('view engine', 'ejs');
-app.set(path.join(__dirname, 'templates'));
+app.set('views', path.join(__dirname, 'templates'));
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(express.static(__dirname)); 
 
@@ -31,15 +31,15 @@ app.use(express.urlencoded({ extended: false }));
 
 
 // getting and posting functions
-app.get("/", (request, response) => {
-  response.render("index",  { error: null });
+app.get('/', (request, response) => {
+  response.render('index');
 });
 
 app.post('/bookDisplay', async (request, response) => {
   const {title, author} = request.body;
   const plusTitle = title.replace(/\s+/g, '+');
   const plusAuthor = author.replace(/\s+/g, '+');
-
+  // console.log(`${author} ${title}`);
 
   bookUrl = libAPI + `title=${plusTitle}&author=${plusAuthor}`;
 
@@ -56,10 +56,10 @@ app.post('/bookDisplay', async (request, response) => {
     title, 
     author, 
     bookUrl,
-    book: {
-      averageRating: firstBook.ratings_average,
-      coverImg: 'https://covers.openlibrary.org/a/olid/'+firstBook.cover_edition_key + '.jpg'
-    }
+    // book: {
+    //   rating: firstBook.ratings_average.toFixed(2),
+    //   coverImg: 'https://covers.openlibrary.org/b/isbn/'+firstBook.isbn[0] + '-M.jpg'
+    // }
   });
 });
 
