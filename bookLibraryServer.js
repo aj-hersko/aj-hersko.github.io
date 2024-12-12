@@ -3,7 +3,7 @@ const fs = require('fs');
 const path = require('path');
 const bodyParser = require('body-parser');
 
-const express = require('express')
+const express = require('express');
 const app = express();
 
 app.set('view engine', 'ejs');
@@ -11,7 +11,7 @@ app.set('views', path.join(__dirname, 'templates'));
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(express.static(__dirname)); 
 
-require("dotenv").config({ path: path.resolve(__dirname, 'credentialsDontPost/.env') })  
+require("dotenv").config({ path: path.resolve(__dirname, 'credentialsDontPost/.env') });  
 
 const uri = process.env.MONGO_CONNECTION_STRING;
 const databaseAndCollection = {db: "CMSC335_DB", collection:"bookWL"};
