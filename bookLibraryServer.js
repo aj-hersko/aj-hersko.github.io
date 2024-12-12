@@ -1,37 +1,68 @@
 const http = require('http');
-const fs = require('fs');
 const path = require('path');
 const bodyParser = require('body-parser');
 
 const express = require('express');
 const app = express();
 
-// app.set('view engine', 'ejs');
-// app.set(path.join(__dirname, 'templates'));
-// app.use(bodyParser.urlencoded({extended:true}));
-// app.use(express.static(__dirname)); 
+app.set('view engine', 'ejs');
+app.set(path.join(__dirname, 'templates'));
+app.use(bodyParser.urlencoded({extended:true}));
+app.use(express.static(__dirname)); 
 
 require("dotenv").config({ path: path.resolve(__dirname, 'credentialsDontPost/.env') });  
 
-app.use(express.static(path.join(__dirname, 'views')));
-app.set("view engine", "ejs");
-app.use(express.urlencoded({ extended: false }));
+// app.use(express.static(path.join(__dirname, 'templates')));
+// app.set("view engine", "ejs");
 
 const uri = process.env.MONGO_CONNECTION_STRING;
 const databaseAndCollection = {db: "CMSC335_DB", collection:"bookWL"};
 const { MongoClient, ServerApiVersion } = require('mongodb');
-const client = new MongoClient(uri);
+const client = new MongoClient(uri, {
+  serverApi: ServerApiVersion.v1,
+});
 
 const portNumber = 80;
 
-//MongoDB accessing functions START CODE HERE
+//MongoDB accessing functions
+
+const libAPI = "https://openlibrary.org/search.json?";
+app.use(express.urlencoded({ extended: false }));
+
 
 // getting and posting functions
 app.get("/", (request, response) => {
   response.render("index",  { error: null });
 });
 
-// START CODE HERE
+app.post('/bookDisplay', async (request, response) => {
+  const {title, author} = request.body;
+  const plusTitle = title.replace(/\s+/g, '+');
+  const plusAuthor = author.replace(/\s+/g, '+');
+
+
+  bookUrl = libAPI + `title=${plusTitle}&author=${plusAuthor}`;
+
+  const urlRes = await fetch(bookUrl);
+  const books = await urlRes.json();
+
+  if (books.length === 0) {
+    return response.status(404).send("That book does not exist, try again");
+  }
+
+  const firstBook = books[0];
+
+  response.render('bookDisplay', {
+    title, 
+    author, 
+    bookUrl,
+    book: {
+      averageRating: firstBook.ratings_average,
+      coverImg: 'https://covers.openlibrary.org/a/olid/'+firstBook.cover_edition_key + '.jpg'
+    }
+  });
+});
+
 
 app.listen(portNumber);
 

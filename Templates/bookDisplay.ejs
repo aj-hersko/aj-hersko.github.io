@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8" />
+	<title>Book Display</title>
+    <link href="/style.css" rel="stylesheet" type="text/css">
+</head>
+
+<script>
+    fetch('<%= bookUrl%>')
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+        })
+</script>
+
+<body>
+    <h1>Book Information</h1>
+	<p>Title: <%= title %>
+        Author: <%= author %>
+        Average Rating: <%= rating %>
+    </p>
+    
+    <hr>
+    <p>To view saved books select <a href="/wishList">Wishlist</a><br></p>
+    <hr>
+</body>
+
+</html>
