@@ -9,6 +9,7 @@ app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'templates'));
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(express.static(__dirname)); 
+app.use(bodyParser.json());
 
 require("dotenv").config({ path: path.resolve(__dirname, 'credentialsDontPost/.env') });  
 
@@ -35,32 +36,39 @@ app.get('/', (request, response) => {
   response.render('index');
 });
 
-app.post('/bookDisplay', async (request, response) => {
+app.post('/bookDisplay', (request, response) => {
   const {title, author} = request.body;
+
   const plusTitle = title.replace(/\s+/g, '+');
   const plusAuthor = author.replace(/\s+/g, '+');
-  // console.log(`${author} ${title}`);
+  
 
   bookUrl = libAPI + `title=${plusTitle}&author=${plusAuthor}`;
+  
+  fetch(bookUrl)
+    .then(r => r.json())
+    .then(jsonData => {
+      if (jsonData.docs && jsonData.docs.length > 0) {
+        const firstBook = jsonData.docs[0];
 
-  const urlRes = await fetch(bookUrl);
-  const books = await urlRes.json();
+        response.render('bookDisplay', {
+          title: firstBook.title,
+          author: firstBook.author_name ? firstBook.author_name[0] : 'Unknown Author', // Handle missing author name
+          bookUrl,
+          rating: firstBook.ratings_average.toFixed(2), // Ensure rating is formatted
+          coverImg: `https://covers.openlibrary.org/b/isbn/${firstBook.isbn[0]}-M.jpg`
+        });
+      }
+      else {
+        return response.status(404).send("That book does not exist, try again");
+      }
+    })
+    .catch(error => {
+      // Handle fetch errors
+      console.error('Error fetching data:', error);
+      response.status(500).send("Error fetching the data");
+    });
 
-  if (books.length === 0) {
-    return response.status(404).send("That book does not exist, try again");
-  }
-
-  const firstBook = books[0];
-
-  response.render('bookDisplay', {
-    title, 
-    author, 
-    bookUrl,
-    // book: {
-    //   rating: firstBook.ratings_average.toFixed(2),
-    //   coverImg: 'https://covers.openlibrary.org/b/isbn/'+firstBook.isbn[0] + '-M.jpg'
-    // }
-  });
 });
 
 
