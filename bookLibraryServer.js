@@ -6,12 +6,16 @@ const bodyParser = require('body-parser');
 const express = require('express');
 const app = express();
 
-app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, 'templates'));
-app.use(bodyParser.urlencoded({extended:true}));
-app.use(express.static(path.join(__dirname, 'views'))); 
+// app.set('view engine', 'ejs');
+// app.set(path.join(__dirname, 'templates'));
+// app.use(bodyParser.urlencoded({extended:true}));
+// app.use(express.static(__dirname)); 
 
 require("dotenv").config({ path: path.resolve(__dirname, 'credentialsDontPost/.env') });  
+
+app.use(express.static(path.join(__dirname, 'views')));
+app.set("view engine", "ejs");
+app.use(express.urlencoded({ extended: false }));
 
 const uri = process.env.MONGO_CONNECTION_STRING;
 const databaseAndCollection = {db: "CMSC335_DB", collection:"bookWL"};
@@ -23,7 +27,10 @@ const portNumber = 80;
 //MongoDB accessing functions START CODE HERE
 
 // getting and posting functions
-app.get("/", (request, response) => {response.render("index");});
+app.get("/", (request, response) => {
+  response.render("index",  { error: null });
+});
+
 // START CODE HERE
 
 app.listen(portNumber);
