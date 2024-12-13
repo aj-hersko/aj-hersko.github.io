@@ -1,12 +1,12 @@
 {
-  "name": "summercamp",
+  "name": "AMLib",
   "version": "1.0.0",
-  "description": "SummerCampServer Project 5 CMSC335",
-  "main": "summerCampServer.js",
+  "description": "final project",
+  "main": "bookLibraryServer.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node app.js"
   },
-  "author": "Maria Pacheco",
+  "author": "Maria Pacheco, Audrey Herskovits",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.20.3",
