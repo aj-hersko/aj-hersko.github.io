@@ -8,7 +8,7 @@ const app = express();
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'Templates')); 
 app.use(bodyParser.urlencoded({extended:true}));
-app.use(express.static(path.join(__dirname, 'templates')));
+app.use(express.static(path.join(__dirname, 'Templates')));
 app.use(bodyParser.json());
 
 require("dotenv").config({ path: path.resolve(__dirname, 'credentialsDontPost/.env') });  
