@@ -36,7 +36,7 @@ app.get('/', (request, response) => {
   response.render('index');
 });
 
-app.post('/bookDisplay', (request, response) => {
+app.post('/bookDisplay', async (request, response) => {
   const {title, author} = request.body;
 
   const plusTitle = title.replace(/\s+/g, '+');
@@ -50,24 +50,23 @@ app.post('/bookDisplay', (request, response) => {
     .then(jsonData => {
       if (jsonData.docs && jsonData.docs.length > 0) {
         const firstBook = jsonData.docs[0];
-
+        
         response.render('bookDisplay', {
-          title: firstBook.title,
-          author: firstBook.author_name ? firstBook.author_name[0] : 'Unknown Author', // Handle missing author name
+          title: title,
+          author: author,
           bookUrl,
-          rating: firstBook.ratings_average.toFixed(2), // Ensure rating is formatted
+          rating: firstBook.ratings_average.toFixed(2), // formatting rating
           ratingCount: firstBook.ratings_count,
-          coverImg: `https://covers.openlibrary.org/b/isbn/${firstBook.isbn[0]}-L.jpg`
+          coverImg: `https://covers.openlibrary.org/b/isbn/${firstBook.isbn[0]}-M.jpg`
         });
       }
       else {
-        return response.status(404).send("That book does not exist, try again");
+        document.getElementById('display').innerHTML = `Please input a valid author and title <a href="/"> Go Home </a>`;
+        alert(`Please input a valid author and title <a href="/"> Go Home </a>`);
       }
     })
     .catch(error => {
-      // Handle fetch errors
-      console.error('Error fetching data:', error);
-      response.status(500).send("Error fetching the data");
+      response.status(500).send(`Please input a valid author and title <a href="/"> Go Home </a>`);
     });
 
 });

@@ -1,6 +1,9 @@
 h1 {
     font-size: 60px;
     color: lightpink;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 
@@ -15,7 +18,7 @@ html {
 h2{
     color:antiquewhite;
     display: block;
-    margin-left: auto;
+    margin-left: 10vw;
     margin-right: auto;
 }
 
@@ -45,7 +48,7 @@ button{
 
 fieldset{
     background-color: antiquewhite;
-    border: 50px dotted black;
+    border: 50px;
     border-radius: 20px;
     display: block;
     margin-left: 10%;
@@ -55,9 +58,12 @@ fieldset{
 
 input {
     margin-left: 20px;
-    width: 300px;
+    width: 50vw;
     height: 40px;
-    font-size: 20px;
+    font-size: 30px;
+    border-radius: 20px;
+    border-color: white;
+    font-family: "Italiana";
 }
 
 a {
@@ -68,9 +74,14 @@ a {
     font-family: "Italiana";
     border-radius: 20px;
     font-size: 30px;
+    margin: 10px;
 }
 
 .gatitaP {
     font-size: 40px;
     color: darkred;
+}
+
+.gatitaH {
+    text-align: left;
 }
