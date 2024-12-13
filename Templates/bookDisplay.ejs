@@ -11,22 +11,22 @@
     <link href="https://fonts.googleapis.com/css2?family=Afacad+Flux:wght@100..1000&family=Agu+Display&family=Italiana&display=swap" rel="stylesheet">
 </head>
 
-<body class="italiana-regular">
+<body class="gatita">
     <h1>Book Information</h1>
     <img src=<%= coverImg %> />
-	<p>Title: <%= title %>
+    <br>
+	<p class="gatitaP">Title: <%= title %>
+        <br>
         <br>
         Author: <%= author %>
+        <br>
         <br>
         Rating: <%= rating %> (<%= ratingCount %>)
         <!-- ADD TO WISHLIST BUTTON (single element form)-->
     </p>
-    
-    <hr>
-    
-    <a href="/wishList">View your Wishlist</a>
+        
+    <a href="/wishList"> View your Wishlist </a>
     <br>
-    <hr>
 </body>
 
 </html>
