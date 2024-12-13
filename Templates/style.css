@@ -1,0 +1,22 @@
+h1 {
+    font-size: 50px;
+    color: darkred;
+}
+
+p {
+    color: darkblue;
+    font-size: 30px;
+}
+
+
+
+.italiana-regular {
+    font-family: "Italiana", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+  }
+  
+
+.flores{
+    background-image: 'flores.jpg';
+}

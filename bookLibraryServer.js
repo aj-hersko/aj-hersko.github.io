@@ -57,7 +57,7 @@ app.post('/bookDisplay', (request, response) => {
           bookUrl,
           rating: firstBook.ratings_average.toFixed(2), // Ensure rating is formatted
           ratingCount: firstBook.ratings_count,
-          coverImg: `https://covers.openlibrary.org/b/isbn/${firstBook.isbn[0]}-M.jpg`
+          coverImg: `https://covers.openlibrary.org/b/isbn/${firstBook.isbn[0]}-L.jpg`
         });
       }
       else {

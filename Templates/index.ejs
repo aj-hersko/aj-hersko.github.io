@@ -4,19 +4,23 @@
 <head>
 	<meta charset="utf-8" />
 	<title>Personal Book Library</title>
-    <link href="/style.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="/templates/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Afacad+Flux:wght@100..1000&family=Agu+Display&family=Italiana&display=swap" rel="stylesheet">
 </head>
 
-<body>
+<body class="italiana-regular">
     <h1>Welcome to your Personal Library</h1>
 	<h2>Search for Book:</h2>
     <form id="bookForm" action="/bookDisplay" method="post">
         <fieldset> 
             <label><strong>Book Title: </strong><input type="text" name="title"/></label> 
+            <br><br>
             <label><strong>Book Author: </strong><input type="text" name="author"></label><br><br> 
         </fieldset> 
 
-            <br> 
+            <br>
             <input type="reset" /> 
             <button type="submit">Search for Book</button> 
     </form> 
