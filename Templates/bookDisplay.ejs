@@ -62,14 +62,17 @@
     }
 
     #wish {
+        display: inline;
+        width: auto;
         padding: 5px;
         background-color: lightpink;
         color: darkred;
         border: 2px darkred dotted;
         font-family: "Italiana";
+        font-size: 25px;
         border-radius: 20px;
         margin: 10px;
-        margin-left: 5vw;
+        margin-left: 110px;
     }
 
     img{
@@ -111,7 +114,7 @@
         <input type="hidden" name="rating" value="<%= rating %>" />
         <input type="hidden" name="ratingCount" value="<%= ratingCount %>" />
         <input type="hidden" name="coverImg" value="<%= coverImg %>" />
-        <button type="submit" id="wish">Add to Wishlist</button>
+        <button type="submit" id="wish"><u>Add to Wishlist</u></button>
     </form>
 
     <script>
