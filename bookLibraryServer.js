@@ -42,6 +42,8 @@ async function addBook(data) {
     const result = await client.db(databaseAndCollection.db).collection(databaseAndCollection.collection).insertOne(data);
   } catch (e) {
     console.error(e);
+  } finally {
+    await client.close();
   }
 }
 
@@ -52,6 +54,8 @@ async function getAllBooks() {
     return books;
   } catch (e) {
     console.error(e);
+  } finally {
+    await client.close();
   }
 }
 
@@ -63,6 +67,8 @@ async function removeAll() {
     return num;
   } catch (e) {
     console.error(e);
+  } finally {
+    await client.close();
   }
 }
 
