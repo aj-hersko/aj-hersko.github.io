@@ -19,22 +19,91 @@ require("dotenv").config({ path: path.resolve(__dirname, 'credentialsDontPost/.e
 const uri = process.env.MONGO_CONNECTION_STRING;
 const databaseAndCollection = {db: "CMSC335_DB", collection:"bookWL"};
 const { MongoClient, ServerApiVersion } = require('mongodb');
+const { removeAllListeners } = require('process');
 const client = new MongoClient(uri, {
   serverApi: ServerApiVersion.v1,
 });
 
 const portNumber = 80;
 
-//MongoDB accessing functions
-
 const libAPI = "https://openlibrary.org/search.json?";
 app.use(express.urlencoded({ extended: false }));
 
+//MongoDB accessing functions
+async function connectMongo() {
+  if (!client.topology || !client.topology.isConnected()) {
+    await client.connect();
+  }
+}
+
+async function addBook(data) {
+  try {
+    await connectMongo();
+    const result = await client.db(databaseAndCollection.db).collection(databaseAndCollection.collection).insertOne(data);
+  } catch (e) {
+    console.error(e);
+  }
+}
+
+async function getAllBooks() {
+  try {
+    await connectMongo();
+    const books = await client.db(databaseAndCollection.db).collection(databaseAndCollection.collection).find({}).toArray();
+    return books;
+  } catch (e) {
+    console.error(e);
+  }
+}
+
+async function removeAll() {
+  try {
+    await connectMongo();
+    const num = await client.db(databaseAndCollection.db).collection(databaseAndCollection.collection).countDocuments();
+    await client.db(databaseAndCollection.db).collection(databaseAndCollection.collection).deleteMany({});
+    return num;
+  } catch (e) {
+    console.error(e);
+  }
+}
 
 // getting and posting functions
 app.get('/', (request, response) => {
   response.render('index');
 });
+
+app.get("/wishList", async (req, res) => {
+  const allBooks = await getAllBooks();
+
+  if (allBooks.length > 0) {
+    const bookRows = allBooks
+      .map(
+        (book) => `
+        <tr>
+          <td>${book.title}</td>
+          <td>${book.author}</td>
+          <td>${book.rating || "N/A"}</td>
+        </tr>`
+      )
+      .join("");
+
+    const results = `
+      <table style="border: 1px solid black; width: 80%; margin: auto;">
+        <tr>
+          <th>Title</th>
+          <th>Author</th>
+          <th>Rating</th>
+        </tr>
+        ${bookRows}
+      </table>`;
+    res.render("wishList", { bookList: results });
+  } else {
+    res.render("wishList", { bookList: "<p>No books in your wishlist.</p>" });
+  }
+});
+
+app.get("/clearWishlist", (request, response) => {
+  response.render("clearWishlist")
+})
 
 app.post('/bookDisplay', async (request, response) => {
   const {title, author} = request.body;
@@ -71,6 +140,46 @@ app.post('/bookDisplay', async (request, response) => {
 
 });
 
+app.post("/wishList", async (req, res) => {
+  const { title, author, rating } = req.body;
+
+  // Add the book to the wishlist collection
+  await addBook({ title, author, rating });
+
+  // Retrieve the wishlist
+  const allBooks = await getAllBooks();
+
+  if (allBooks.length > 0) {
+    const bookRows = allBooks
+      .map(
+        (book) => `
+        <tr>
+          <td>${book.title}</td>
+          <td>${book.author}</td>
+          <td>${book.rating || "N/A"}</td>
+        </tr>`
+      )
+      .join("");
+
+    const results = `
+      <table style="border: 1px solid black; width: 80%; margin: auto;">
+        <tr>
+          <th>Title</th>
+          <th>Author</th>
+          <th>Rating</th>
+        </tr>
+        ${bookRows}
+      </table>`;
+    res.render("wishList", { bookList: results });
+  } else {
+    res.render("wishList", { bookList: "<p>No books in your wishlist.</p>" });
+  }
+});
+
+app.post("/clearWishlist", async (req, res) => {
+  const numBook = await removeAll();
+  res.render("clearWishlist", { totalBooks: numBook})
+});
 
 app.listen(portNumber);
 

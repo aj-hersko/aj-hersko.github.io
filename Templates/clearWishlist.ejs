@@ -3,7 +3,7 @@
 
 <head>
 	<meta charset="utf-8" />
-	<title>Personal Book Library</title>
+	<title>Book Display</title>
     <link rel="stylesheet" href="/styles.css">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -18,7 +18,6 @@
     <meta name="apple-mobile-web-app-title" content="MyWebSite" />
     <link rel="manifest" href="/site.webmanifest" />
 </head>
-
 <style>
     h1 {
         font-size: 60px;
@@ -35,8 +34,6 @@
         font-style: normal;
         color:cornflowerblue;
         font-size: 30px;   
-        background-image: url('https://i.pinimg.com/736x/3b/c6/ab/3bc6ab91240a70d2a93cd331833d5e66.jpg');
-        background-size: auto 100vh;
     }
     
     h2{
@@ -44,6 +41,17 @@
         display: block;
         margin-left: 10vw;
         margin-right: auto;
+    }
+
+    .flores{
+        background-image: url('https://i.pinimg.com/736x/3b/c6/ab/3bc6ab91240a70d2a93cd331833d5e66.jpg');
+        background-size: auto 100vh;
+    }
+
+    .gatita{
+        background-image: url('https://i.pinimg.com/736x/cf/11/f3/cf11f3f39f7b8f19b94e82c2472062f8.jpg');
+        background-size: 50vw 100vh;
+        margin-left: 5vw;
     }
 
     button{
@@ -79,31 +87,33 @@
         font-family: "Italiana";
     }
 
+    a {
+        padding: 5px;
+        background-color: lightpink;
+        color: darkred;
+        border: 2px darkred dotted;
+        font-family: "Italiana";
+        border-radius: 20px;
+        font-size: 30px;
+        margin: 10px;
+    }
+
+    .gatitaP {
+        font-size: 40px;
+        color: darkred;
+    }
+
+    .gatitaH {
+        text-align: left;
+    }
 </style>
 
 <body>
-    <h1>Welcome to your Personal Library</h1>
-	<h2>Search for a Book:</h2>
-    <form id="bookForm" action="/bookDisplay" method="post">
-        <fieldset> 
-            <br> 
-            <label><strong>Book Title: </strong><input type="text" name="title"/></label> 
-            <br><br>
-            <label><strong>Book Author: </strong><input type="name" name="author"></label>
-            <br><br> 
-        </fieldset> 
-
-            <br>
-            <button type="submit">Search for Book</button> 
-            <br>
-            <div id="display"></div>
-    </form> 
-
-    <a href="/wishList">
-        <button>View Wishlist</button>
-    </a>
-
+    <h1>Cleared Wishlist</h1>
+    All books have been removed from the database. Number of books removed <%- totalBooks %>
+    <br><br>
+    <a href="/">Home</a>
+    <a href="/wishList">Wishlist</a>
 </body>
-
 
 </html>

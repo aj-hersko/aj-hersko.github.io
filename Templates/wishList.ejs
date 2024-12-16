@@ -9,6 +9,14 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Afacad+Flux:wght@100..1000&family=Agu+Display&family=Italiana&display=swap" rel="stylesheet">
+
+    <!-- Favicon information -->
+    <link rel="icon" type="image/png" href="/favicon/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg" />
+    <link rel="shortcut icon" href="/favicon/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="MyWebSite" />
+    <link rel="manifest" href="/site.webmanifest" />
 </head>
 <style>
     h1 {
@@ -102,18 +110,30 @@
 
 <body>
     <h1>Book Wishlist</h1>
-    <table>
-         <!-- for each book: -->
-        <th><td>Title</td>
-            <td>Author</td>
-            <td>Average Rating</td>
-            <td>Number of Ratings</td>
-            <td>Cover</td>
-        </th>
-    </table>
-    
+
+    <div>
+        <%- bookList %>
+    </div>
+
     <hr>
-    <hr>
+    <a href="/">Go Back to Home</a>
+    <form action="/clearWishlist" method="POST">
+        <button type="submit">Clear Wishlist</button>
+    </form>
+
+    <script>
+        const form = document.querySelector("form");
+
+        form.addEventListener("submit", function (event) {
+            const confirmAdd = window.confirm(
+                "Are you sure you want clear your Wish List?"
+            );
+
+            if (!confirmAdd) {
+                event.preventDefault();
+            }
+        });
+    </script>
 </body>
 
 </html>

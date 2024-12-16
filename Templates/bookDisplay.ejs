@@ -9,6 +9,14 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Afacad+Flux:wght@100..1000&family=Agu+Display&family=Italiana&display=swap" rel="stylesheet">
+
+    <!-- Favicon information -->
+    <link rel="icon" type="image/png" href="/favicon/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg" />
+    <link rel="shortcut icon" href="/favicon/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="MyWebSite" />
+    <link rel="manifest" href="/site.webmanifest" />
 </head>
 
 <style>
@@ -33,6 +41,17 @@
     }
 
     a {
+        padding: 5px;
+        background-color: lightpink;
+        color: darkred;
+        border: 2px darkred dotted;
+        font-family: "Italiana";
+        border-radius: 20px;
+        margin: 10px;
+        margin-left: 5vw;
+    }
+
+    #wish {
         padding: 5px;
         background-color: lightpink;
         color: darkred;
@@ -75,7 +94,29 @@
     <a href="/"> Go Home </a>
 
     <!-- ADD TO WISHLIST CHANGE CONFIG HERE -->
-    <a href="/wishList"> Add to Wishlist</a>
+    <!-- <a href="/wishList"> Add to Wishlist</a> -->
+    <form action="/wishList" method="post">
+        <input type="hidden" name="title" value="<%= title %>" />
+        <input type="hidden" name="author" value="<%= author %>" />
+        <input type="hidden" name="rating" value="<%= rating %>" />
+        <input type="hidden" name="ratingCount" value="<%= ratingCount %>" />
+        <input type="hidden" name="coverImg" value="<%= coverImg %>" />
+        <button type="submit" id="wish">Add to Wishlist</button>
+    </form>
+
+    <script>
+        const form = document.querySelector("form");
+
+        form.addEventListener("submit", function (event) {
+            const confirmAdd = window.confirm(
+                "Are you sure you want to add this book to your Wish List?"
+            );
+
+            if (!confirmAdd) {
+                event.preventDefault();
+            }
+        });
+    </script>
 </body>
 
 </html>
